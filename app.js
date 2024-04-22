@@ -24,7 +24,6 @@ function onInitMapsAPI() {
     onPreloader(false);
     const map = new mapboxgl.Map(mapOptions);
 
-
     map.on('load', () => {
         map.addSource('mouver-traffic', {
             type: 'vector'
