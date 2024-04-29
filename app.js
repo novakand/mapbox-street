@@ -53,6 +53,13 @@ function onInitMapsAPI() {
             },
             'road-label-simple'
         );
+
+    //     map.addStyle({
+    //         name: 'circles',
+    //         before: 'place-labels',
+    //         style: 'mapbox://styles/mapbox/standard',
+    // });
+        
     });
 }
 
