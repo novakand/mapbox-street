@@ -25,41 +25,26 @@ function onInitMapsAPI() {
     const map = new mapboxgl.Map(mapOptions);
 
     map.on('load', () => {
-        map.addSource('mouver-traffic', {
-            type: 'vector'
+        map.addSource('radar', {
+            'type': 'raster',
+             'tiles': [
+            'https://test.bstrv.ru/api/layer.php/{z}/{x}/{y}.png?type=36048'
+             ],
+           
+            'tileSize': 1024
         });
-        map.addLayer(
-            {
-                'id': 'traffic-data',
-                'type': 'line',
-                'source': 'mouver-traffic',
-                'source-layer': 'traffic-counts-a6074l',
-                'layout': {
-                    'line-join': 'round',
-                    'line-cap': 'round'
-                },
-                'paint': {
-                    'line-color': [
-                        'interpolate',
-                        ['linear'],
-                        ['get', 'count'],
-                        0, 'yellow',
-
-                        500, 'orange',
-                        10000, 'red'
-                    ],
-                    'line-width': 1
-                }
+        map.addLayer({
+            id: 'radar-layer',
+            'type': 'raster',
+            'source': 'radar',
+            'paint': {
+                'raster-fade-duration': 0
             },
-            'road-label-simple'
-        );
+            projection: {
+                name: 'mercator'
+              }
 
-    //     map.addStyle({
-    //         name: 'circles',
-    //         before: 'place-labels',
-    //         style: 'mapbox://styles/mapbox/standard',
-    // });
-        
+        });
     });
 }
 
